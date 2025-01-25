@@ -1,4 +1,4 @@
-// Copyright (C) 2018-2024 Intel Corporation
+// Copyright (C) 2018-2025 Intel Corporation
 // SPDX-License-Identifier: Apache-2.0
 //
 
@@ -9,11 +9,12 @@
 #include <cstdint>
 #include <numeric>
 #include <algorithm>
+#include <optional>
 #include <vector>
 #include <string>
 #include <utility>
 #include <stdexcept>
-#include "intel_gpu/runtime/optionals.hpp"
+
 
 namespace cldnn {
 /// @addtogroup cpp_api C++ API
@@ -150,6 +151,7 @@ struct format {
         os_is_zyx_osv32_isv16,
         os_is_yx_osv32_isv2,                          ///< format used only for fully connected weights compressed for i4
         os_is_zyx_osv64_isv16,
+        os_is_yx_osv64_isv2,                          ///< format used only for fully connected weights compressed for i4
         os_zyxi_osv16,                                ///< format used for weights for 3D convolution
         os_is_yx_isv16_osv16,                         ///< format used for blocked convolution
         os_is_zyx_isv16_osv16,                        ///< format used for weights for blocked 3D convolution
@@ -366,7 +368,7 @@ struct format {
 
     type value;
 
-    optional_value<format_traits> custom_traits = {};
+    std::optional<format_traits> custom_traits = {};
 
     /// @brief Implicit conversion from format::type.
     format(type t) : value(t) {}

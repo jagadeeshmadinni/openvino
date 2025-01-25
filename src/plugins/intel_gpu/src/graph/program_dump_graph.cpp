@@ -1,4 +1,4 @@
-// Copyright (C) 2018-2024 Intel Corporation
+// Copyright (C) 2018-2025 Intel Corporation
 // SPDX-License-Identifier: Apache-2.0
 //
 
@@ -170,7 +170,7 @@ std::string get_dir_path(const ExecutionConfig& config) {
 
 void dump_graph_init(std::ofstream& graph,
                      const program& program,
-                     std::function<std::shared_ptr<primitive_inst>(const primitive_id&)> get_primitive_inst) {
+                     std::function<std::shared_ptr<const primitive_inst>(const primitive_id&)> get_primitive_inst) {
     const std::string invalid_layout_msg = "(invalid layout)";
 
     const auto dump_mem_info = [&invalid_layout_msg, &get_primitive_inst](const program_node* ptr) {

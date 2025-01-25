@@ -1,4 +1,4 @@
-// Copyright (C) 2018-2024 Intel Corporation
+// Copyright (C) 2018-2025 Intel Corporation
 // SPDX-License-Identifier: Apache-2.0
 //
 
@@ -42,9 +42,13 @@ OP_CONVERTER(translate_argmax);
 OP_CONVERTER(translate_argmin);
 OP_CONVERTER(translate_as_strided);
 OP_CONVERTER(translate_as_tensor);
-OP_CONVERTER(translate_avg_poolnd);
+OP_CONVERTER(translate_atan2);
+OP_CONVERTER(translate_avg_pool1d);
+OP_CONVERTER(translate_avg_pool2d);
+OP_CONVERTER(translate_avg_pool3d);
 OP_CONVERTER(translate_bool);
 OP_CONVERTER(translate_batch_norm);
+OP_CONVERTER(translate_bernoulli);
 OP_CONVERTER(translate_bitwise_and);
 OP_CONVERTER(translate_bitwise_not);
 OP_CONVERTER(translate_bitwise_or);
@@ -56,9 +60,9 @@ OP_CONVERTER(translate_celu);
 OP_CONVERTER(translate_channel_shuffle);
 OP_CONVERTER(translate_clamp);
 OP_CONVERTER(translate_col2im);
+OP_CONVERTER(translate_complex);
 OP_CONVERTER(translate_constant);
 OP_CONVERTER(translate_conv_transposend);
-OP_CONVERTER(translate_conv1d_ext);
 OP_CONVERTER(translate_convnd);
 OP_CONVERTER(translate_convolution);
 OP_CONVERTER(translate_convolution_mode);
@@ -74,7 +78,6 @@ OP_CONVERTER(translate_dot);
 OP_CONVERTER(translate_elu);
 OP_CONVERTER(translate_embedding);
 OP_CONVERTER(translate_embedding_bag);
-OP_CONVERTER(translate_embedding_ext);
 OP_CONVERTER(translate_empty);
 OP_CONVERTER(translate_empty_like);
 OP_CONVERTER(translate_erf);
@@ -85,6 +88,8 @@ OP_CONVERTER(translate_expm1);
 OP_CONVERTER(translate_eye);
 OP_CONVERTER(translate_fake_quantize_per_channel_affine);
 OP_CONVERTER(translate_fake_quantize_per_tensor_affine);
+OP_CONVERTER(translate_fft_irfftn);
+OP_CONVERTER(translate_fft_rfftn);
 OP_CONVERTER(translate_fill);
 OP_CONVERTER(translate_fill_diagonal);
 OP_CONVERTER(translate_flatten);
@@ -107,10 +112,12 @@ OP_CONVERTER(translate_hann_window);
 OP_CONVERTER(translate_hardtanh);
 OP_CONVERTER(translate_if);
 OP_CONVERTER(translate_im2col);
+OP_CONVERTER(translate_imag);
 OP_CONVERTER(translate_index);
 OP_CONVERTER(translate_index_add);
 OP_CONVERTER(translate_index_copy_);
-OP_CONVERTER(translate_index_put_);
+OP_CONVERTER(translate_index_fill_);
+OP_CONVERTER(translate_index_put);
 OP_CONVERTER(translate_index_select);
 OP_CONVERTER(translate_instance_norm);
 OP_CONVERTER(translate_int);
@@ -118,6 +125,7 @@ OP_CONVERTER(translate_inverse);
 OP_CONVERTER(translate_is_nonzero);
 OP_CONVERTER(translate_layer_norm);
 OP_CONVERTER(translate_len);
+OP_CONVERTER(translate_lerp);
 OP_CONVERTER(translate_linalg_cross);
 OP_CONVERTER(translate_linalg_norm);
 OP_CONVERTER(translate_linalg_matrix_norm);
@@ -139,7 +147,9 @@ OP_CONVERTER(translate_masked_scatter);
 OP_CONVERTER(translate_masked_select);
 OP_CONVERTER(translate_max);
 OP_CONVERTER(translate_maximum);
-OP_CONVERTER(translate_max_poolnd);
+OP_CONVERTER(translate_max_pool1d);
+OP_CONVERTER(translate_max_pool2d);
+OP_CONVERTER(translate_max_pool3d);
 OP_CONVERTER(translate_mean);
 OP_CONVERTER(translate_meshgrid);
 OP_CONVERTER(translate_min);
@@ -168,6 +178,7 @@ OP_CONVERTER(translate_outer);
 OP_CONVERTER(translate_pack_padded_sequence);
 OP_CONVERTER(translate_pad);
 OP_CONVERTER(translate_pad_packed_sequence);
+OP_CONVERTER(translate_permute);
 OP_CONVERTER(translate_pairwise_distance);
 OP_CONVERTER(translate_pixel_shuffle);
 OP_CONVERTER(translate_pixel_unshuffle);
@@ -186,6 +197,7 @@ OP_CONVERTER(translate_randn);
 OP_CONVERTER(translate_randint);
 OP_CONVERTER(translate_rand_like);
 OP_CONVERTER(translate_randn_like);
+OP_CONVERTER(translate_real);
 OP_CONVERTER(translate_reciprocal);
 OP_CONVERTER(translate_relu6);
 OP_CONVERTER(translate_remainder);
@@ -215,6 +227,7 @@ OP_CONVERTER(translate_square);
 OP_CONVERTER(translate_squeeze);
 OP_CONVERTER(translate_std);
 OP_CONVERTER(translate_std_mean);
+OP_CONVERTER(translate_stft);
 OP_CONVERTER(translate_sub);
 OP_CONVERTER(translate_sub_);
 OP_CONVERTER(translate_sum);
@@ -239,6 +252,8 @@ OP_CONVERTER(translate_upsample_nearest3d);
 OP_CONVERTER(translate_upsample_trilinear3d);
 OP_CONVERTER(translate_var);
 OP_CONVERTER(translate_var_mean);
+OP_CONVERTER(translate_view_as_complex);
+OP_CONVERTER(translate_view_as_real);
 OP_CONVERTER(translate_weight_norm);
 OP_CONVERTER(translate_where);
 OP_CONVERTER(translate_zeros);
@@ -267,7 +282,6 @@ OP_CONVERTER(translate_chunk_fx);
 OP_CONVERTER(translate_div_fx);
 OP_CONVERTER(translate_div_fx_);
 OP_CONVERTER(translate_embedding_bag_fx);
-OP_CONVERTER(translate_expand_fx);
 OP_CONVERTER(translate_eye_fx);
 OP_CONVERTER(translate_fake_quantize_per_channel_affine_fx);
 OP_CONVERTER(translate_fake_quantize_per_tensor_affine_fx);
@@ -281,7 +295,8 @@ OP_CONVERTER(translate_leaky_relu_fx);
 OP_CONVERTER(translate_log_sigmoid_fx);
 OP_CONVERTER(translate_log_softmax_fx);
 OP_CONVERTER(translate_max_dim_fx);
-OP_CONVERTER(translate_max_poolnd_fx);
+OP_CONVERTER(translate_max_pool2d_fx);
+OP_CONVERTER(translate_max_pool3d_fx);
 OP_CONVERTER(translate_mean_fx);
 OP_CONVERTER(translate_min_dim_fx);
 OP_CONVERTER(translate_new_full_fx);
@@ -290,10 +305,11 @@ OP_CONVERTER(translate_new_zeros_fx);
 OP_CONVERTER(translate_ones_fx);
 OP_CONVERTER(translate_ones_like_fx);
 OP_CONVERTER(translate_reflection_pad_nd_fx);
-OP_CONVERTER(translate_reshape_fx);
+OP_CONVERTER(translate_repeat_fx);
 OP_CONVERTER(translate_rsub_fx);
 OP_CONVERTER(translate_scalar_tensor_fx);
 OP_CONVERTER(translate_scaled_dot_product_attention_fx);
+OP_CONVERTER(translate_search_sorted);
 OP_CONVERTER(translate_select_scatter_fx);
 OP_CONVERTER(translate_slice_fx);
 OP_CONVERTER(translate_slice_scatter_fx);
@@ -315,6 +331,10 @@ OP_CONVERTER(translate_unbind_int_fx);
 OP_CONVERTER(translate_unique2);
 OP_CONVERTER(translate_zeros_fx);
 OP_CONVERTER(translate_zeros_like_fx);
+// Extensions
+OP_CONVERTER(translate_conv1d_ext);
+OP_CONVERTER(translate_embedding_ext);
+OP_CONVERTER(translate_linear_awq);
 
 }  // namespace op
 
@@ -322,12 +342,15 @@ OP_CONVERTER(translate_zeros_like_fx);
 const std::unordered_map<std::string, CreatorFunction> get_supported_ops_ts() {
     return {
         {"aten::__and__", op::translate_bitwise_and},
+        {"aten::__iand__", op::inplace_op<op::translate_bitwise_and>},
         {"aten::__derive_index", op::translate_derive_index},
         {"aten::__getitem__", op::translate_getitem},
         {"aten::__not__", op::translate_1to1_match_1_inputs<opset10::LogicalNot>},
         {"aten::__or__", op::translate_bitwise_or},
+        {"aten::__ior__", op::inplace_op<op::translate_bitwise_or>},
         {"aten::__range_length", op::translate_range_length},
         {"aten::__xor__", op::translate_bitwise_xor},
+        {"aten::__ixor__", op::inplace_op<op::translate_bitwise_xor>},
         {"aten::_convolution", op::translate_convolution},
         {"aten::_convolution_mode", op::translate_convolution_mode},
         {"aten::_native_multi_head_attention", op::translate_native_multi_head_attention},
@@ -380,11 +403,13 @@ const std::unordered_map<std::string, CreatorFunction> get_supported_ops_ts() {
         {"aten::atanh",
          op::optional_out<op::translate_1to1_match_1_inputs_with_fp32_type_alignment<opset10::Atanh>, 1>},
         {"aten::atanh_", op::inplace_op<op::translate_1to1_match_1_inputs<opset10::Atanh>>},
-        {"aten::avg_pool1d", op::quantizable_op<op::translate_avg_poolnd>},
-        {"aten::avg_pool2d", op::quantizable_op<op::translate_avg_poolnd>},
-        {"aten::avg_pool3d", op::quantizable_op<op::translate_avg_poolnd>},
+        {"aten::atan2", op::translate_atan2},
+        {"aten::avg_pool1d", op::quantizable_op<op::translate_avg_pool1d>},
+        {"aten::avg_pool2d", op::quantizable_op<op::translate_avg_pool2d>},
+        {"aten::avg_pool3d", op::quantizable_op<op::translate_avg_pool3d>},
         {"aten::baddbmm", op::translate_addmm},
         {"aten::batch_norm", op::translate_batch_norm},
+        {"aten::bernoulli", op::translate_bernoulli},
         {"aten::bitwise_and", op::translate_bitwise_and},
         {"aten::bitwise_not", op::translate_bitwise_not},
         {"aten::bitwise_or", op::translate_bitwise_or},
@@ -407,8 +432,9 @@ const std::unordered_map<std::string, CreatorFunction> get_supported_ops_ts() {
         {"aten::clip", op::translate_clamp},
         {"aten::clone", op::skip_node},  // ignore clone operators that are inserted by PyTorch autograd
         {"aten::col2im", op::translate_col2im},
-        // aten::complex - Supported in limited set of patterns
+        {"aten::complex", op::translate_complex},
         {"aten::concat", op::translate_cat},
+        {"aten::concatenate", op::translate_cat},
         {"aten::contiguous", op::skip_node},  // In openvino how tensors are stored in memory is internal plugin detail,
                                               // we assume all tensors are contiguous
         {"aten::conv_transpose1d", op::translate_conv_transposend},
@@ -441,6 +467,7 @@ const std::unordered_map<std::string, CreatorFunction> get_supported_ops_ts() {
         {"aten::empty", op::translate_empty},
         {"aten::empty_like", op::translate_empty_like},
         {"aten::eq", op::translate_1to1_match_2_inputs_align_types<opset10::Equal>},
+        {"aten::equal", op::translate_1to1_match_2_inputs_align_types<opset10::Equal>},
         {"aten::erf", op::translate_erf},
         {"aten::erfc", op::translate_erfc},
         {"aten::exp", op::optional_out<op::translate_1to1_match_1_inputs_with_fp32_type_alignment<opset10::Exp>, 1>},
@@ -452,8 +479,8 @@ const std::unordered_map<std::string, CreatorFunction> get_supported_ops_ts() {
         {"aten::fake_quantize_per_channel_affine", op::translate_fake_quantize_per_channel_affine},
         {"aten::fake_quantize_per_tensor_affine", op::translate_fake_quantize_per_tensor_affine},
         {"aten::feature_dropout", op::skip_node},
-        // aten::fft_irfftn - Supported in limited set of patterns
-        // aten::fft_rfftn - Supported in limited set of patterns
+        {"aten::fft_irfftn", op::translate_fft_irfftn},
+        {"aten::fft_rfftn", op::translate_fft_rfftn},
         {"aten::fill", op::translate_fill},
         {"aten::fill_diagonal", op::translate_fill_diagonal},
         {"aten::flatten", op::quantizable_op<op::translate_flatten>},
@@ -480,10 +507,11 @@ const std::unordered_map<std::string, CreatorFunction> get_supported_ops_ts() {
         {"aten::hardswish", op::quantizable_op<op::translate_1to1_match_1_inputs<opset10::HSwish>>},
         {"aten::hardtanh", op::quantizable_op<op::translate_hardtanh>},
         {"aten::im2col", op::translate_im2col},
-        // aten::imag - Supported in limited set of patterns
+        {"aten::imag", op::translate_imag},
         // aten::index - Supported in limited set of patterns
         {"aten::index_copy_", op::inplace_op<op::translate_index_copy_>},
-        {"aten::index_put_", op::inplace_op<op::translate_index_put_>},
+        {"aten::index_fill_", op::inplace_op<op::translate_index_fill_>},
+        {"aten::index_put", op::translate_index_put},
         {"aten::index_add", op::translate_index_add},
         {"aten::index_select", op::translate_index_select},
         {"aten::instance_norm", op::translate_instance_norm},
@@ -500,6 +528,7 @@ const std::unordered_map<std::string, CreatorFunction> get_supported_ops_ts() {
         {"aten::le", op::translate_1to1_match_2_inputs_align_types<opset10::LessEqual>},
         {"aten::leaky_relu", op::translate_1to1_match_2_inputs<opset10::PRelu>},
         {"aten::len", op::translate_len},
+        {"aten::lerp", op::translate_lerp},
         // lift op is torchscript specific op responsible for tensors coping with guarantee of new memory allocation
         {"aten::lift", op::skip_node},
         {"aten::lift_fresh", op::skip_node},
@@ -525,6 +554,7 @@ const std::unordered_map<std::string, CreatorFunction> get_supported_ops_ts() {
         {"aten::log2_", op::inplace_op<op::translate_log2>},
         {"aten::log10", op::optional_out<op::translate_log10, 1>},
         {"aten::log10_", op::inplace_op<op::translate_log10>},
+        {"aten::logsumexp", op::translate_logsumexp},
         {"aten::lstm", op::translate_lstm},
         {"aten::lt", op::translate_1to1_match_2_inputs_align_types<opset10::Less>},
         {"aten::masked_fill", op::translate_masked_fill},
@@ -534,12 +564,12 @@ const std::unordered_map<std::string, CreatorFunction> get_supported_ops_ts() {
         {"aten::max", op::translate_max},
         {"aten::mv", op::translate_1to1_match_2_inputs<opset10::MatMul>},
         {"aten::maximum", op::translate_maximum},
-        {"aten::max_pool1d", op::quantizable_op<op::translate_max_poolnd>},
-        {"aten::max_pool1d_with_indices", op::quantizable_op<op::translate_max_poolnd>},
-        {"aten::max_pool2d", op::quantizable_op<op::translate_max_poolnd>},
-        {"aten::max_pool2d_with_indices", op::quantizable_op<op::translate_max_poolnd>},
-        {"aten::max_pool3d", op::quantizable_op<op::translate_max_poolnd>},
-        {"aten::max_pool3d_with_indices", op::quantizable_op<op::translate_max_poolnd>},
+        {"aten::max_pool1d", op::quantizable_op<op::translate_max_pool1d>},
+        {"aten::max_pool1d_with_indices", op::quantizable_op<op::translate_max_pool1d>},
+        {"aten::max_pool2d", op::quantizable_op<op::translate_max_pool2d>},
+        {"aten::max_pool2d_with_indices", op::quantizable_op<op::translate_max_pool2d>},
+        {"aten::max_pool3d", op::quantizable_op<op::translate_max_pool3d>},
+        {"aten::max_pool3d_with_indices", op::quantizable_op<op::translate_max_pool3d>},
         {"aten::mean", op::quantizable_op<op::translate_mean>},
         {"aten::meshgrid", op::translate_meshgrid},
         {"aten::min", op::translate_min},
@@ -572,7 +602,7 @@ const std::unordered_map<std::string, CreatorFunction> get_supported_ops_ts() {
         {"aten::outer", op::translate_outer},
         {"aten::pad", op::translate_pad},
         {"aten::pairwise_distance", op::translate_pairwise_distance},
-        {"aten::permute", op::translate_1to1_match_2_inputs<opset10::Transpose>},
+        {"aten::permute", op::translate_permute},
         {"aten::pixel_shuffle", op::translate_pixel_shuffle},
         {"aten::pixel_unshuffle", op::translate_pixel_unshuffle},
         {"aten::prelu", op::translate_1to1_match_2_inputs<opset10::PRelu>},
@@ -586,7 +616,7 @@ const std::unordered_map<std::string, CreatorFunction> get_supported_ops_ts() {
         {"aten::randint", op::translate_randint},
         {"aten::randn", op::translate_randn},
         {"aten::randn_like", op::translate_randn_like},
-        // aten::real - Supported in limited set of patterns
+        {"aten::real", op::translate_real},
         {"aten::reciprocal", op::optional_out<op::translate_reciprocal, 1>},
         {"aten::reciprocal_", op::inplace_op<op::translate_reciprocal>},
         // aten::reflection_pad2d - Supported in limited set of patterns
@@ -610,6 +640,7 @@ const std::unordered_map<std::string, CreatorFunction> get_supported_ops_ts() {
         {"aten::rsqrt", op::optional_out<op::translate_rsqrt, 1>},
         {"aten::rsqrt_", op::inplace_op<op::translate_rsqrt>},
         {"aten::rsub", op::translate_rsub},
+        {"aten::searchsorted", op::translate_search_sorted},
         {"aten::ScalarImplicit", op::skip_node},
         {"aten::scaled_dot_product_attention", op::translate_scaled_dot_product_attention},
         {"aten::scatter", op::translate_scatter},
@@ -640,6 +671,7 @@ const std::unordered_map<std::string, CreatorFunction> get_supported_ops_ts() {
         // aten::stack - Supported in limited set of patterns
         {"aten::std", op::translate_std},
         {"aten::std_mean", op::translate_std_mean},
+        {"aten::stft", op::translate_stft},
         {"aten::sub", op::translate_sub},
         {"aten::sub_", op::translate_sub_},
         {"aten::sum", op::translate_sum},
@@ -663,6 +695,7 @@ const std::unordered_map<std::string, CreatorFunction> get_supported_ops_ts() {
         // aten::unbind - Supported in limited set of patterns
         {"aten::unflatten", op::translate_unflatten},
         {"aten::unfold", op::translate_unfold},
+        // aten::unsafe_chunk - Supported in limited set of patterns
         {"aten::unsqueeze", op::quantizable_op<op::translate_1to1_match_2_inputs<opset10::Unsqueeze>>},
         {"aten::upsample_bicubic2d", op::translate_upsample_bicubic2d},
         {"aten::upsample_bilinear2d", op::translate_upsample_bilinear2d},
@@ -675,16 +708,22 @@ const std::unordered_map<std::string, CreatorFunction> get_supported_ops_ts() {
         {"aten::var_mean", op::translate_var_mean},
         {"aten::view", op::quantizable_op<op::translate_reshape>},
         {"aten::view_as", op::translate_reshape_as},
+        {"aten::view_as_complex", op::translate_view_as_complex},
+        {"aten::view_as_real", op::translate_view_as_real},
+        {"aten::wait", op::skip_node},
         {"aten::where", op::translate_where},
         {"aten::zero", op::translate_zeros_like},
         {"aten::zeros", op::translate_zeros},
         {"aten::zeros_like", op::translate_zeros_like},
+        {"ov_ext::awq_gemm", op::translate_linear_awq},
         {"ov_ext::embedding", op::translate_embedding_ext},
         {"ov_ext::conv1d", op::translate_conv1d_ext},
         {"ov_ext::linear", op::translate_linear},
+        {"prim::abs", op::translate_1to1_match_1_inputs<opset10::Abs>},
         {"prim::Constant", op::translate_constant},
         {"prim::device", op::translate_constant},
         // prim::DictConstruct - Supported in limited set of patterns
+        {"prim::fork", op::translate_pythonop},
         {"prim::GetAttr", op::translate_get_attr},
         {"prim::If", op::translate_if},
         {"prim::is_cuda", op::return_false_scalar},
@@ -734,11 +773,12 @@ const std::unordered_map<std::string, CreatorFunction> get_supported_ops_fx() {
         {"aten._native_batch_norm_legit.no_stats", op::translate_batch_norm_legit_no_stats_fx},
         {"aten._native_batch_norm_legit_functional.default", op::translate_batch_norm_legit_fx},
         {"aten._native_batch_norm_legit_no_training.default", op::translate_batch_norm_legit_no_training_fx},
+        {"aten._safe_softmax.default", op::translate_softmax_fx},
         {"aten._scaled_dot_product_flash_attention.default", op::translate_scaled_dot_product_attention_fx},
         {"aten._scaled_dot_product_flash_attention_for_cpu.default", op::translate_scaled_dot_product_attention_fx},
         {"aten._softmax.default", op::translate_softmax_fx},
         {"aten._to_copy.default", op::translate_to_fx},
-        {"aten._unsafe_view.default", op::translate_reshape_fx},
+        {"aten._unsafe_view.default", op::translate_reshape},
         {"aten.abs.default", op::translate_1to1_match_1_inputs<opset10::Abs>},
         {"aten.acos.default", op::translate_1to1_match_1_inputs_with_fp32_type_alignment<opset10::Acos>},
         {"aten.acosh.default", op::translate_1to1_match_1_inputs_with_fp32_type_alignment<opset10::Acosh>},
@@ -768,8 +808,9 @@ const std::unordered_map<std::string, CreatorFunction> get_supported_ops_fx() {
         {"aten.asinh.default", op::translate_1to1_match_1_inputs_with_fp32_type_alignment<opset10::Asinh>},
         {"aten.atan.default", op::translate_1to1_match_1_inputs_with_fp32_type_alignment<opset10::Atan>},
         {"aten.atanh.default", op::translate_1to1_match_1_inputs_with_fp32_type_alignment<opset10::Atanh>},
-        {"aten.avg_pool2d.default", op::translate_avg_poolnd},
-        {"aten.avg_pool3d.default", op::translate_avg_poolnd},
+        {"aten.atan2.default", op::translate_atan2},
+        {"aten.avg_pool2d.default", op::translate_avg_pool2d},
+        {"aten.avg_pool3d.default", op::translate_avg_pool3d},
         {"aten.baddbmm.default", op::translate_addmm_fx},
         {"aten.bitwise_and.Scalar", op::translate_bitwise_and},
         {"aten.bitwise_and.Tensor", op::translate_bitwise_and},
@@ -787,6 +828,7 @@ const std::unordered_map<std::string, CreatorFunction> get_supported_ops_fx() {
         {"aten.clamp_min.default", op::translate_1to1_match_2_inputs_align_types<opset10::Maximum>},
         {"aten.clamp_min.Tensor", op::translate_1to1_match_2_inputs_align_types<opset10::Maximum>},
         {"aten.clone.default", op::skip_node},  // ignore clone operators that are inserted by PyTorch autograd
+        {"aten.col2im.default", op::translate_col2im},
         {"aten.constant_pad_nd.default", op::translate_constant_pad_nd_fx},
         {"aten.convolution.default", op::translate_convolution},
         {"aten.copy.default", op::translate_copy_fx},
@@ -811,7 +853,7 @@ const std::unordered_map<std::string, CreatorFunction> get_supported_ops_fx() {
         {"aten.erfc.default", op::translate_erfc},
         {"aten.exp.default", op::translate_1to1_match_1_inputs_with_fp32_type_alignment<opset10::Exp>},
         {"aten.expm1.default", op::translate_expm1},
-        {"aten.expand.default", op::translate_expand_fx},
+        {"aten.expand.default", op::translate_expand},
         {"aten.eye.m", op::translate_eye_fx},
         {"aten.fake_quantize_per_channel_affine_cachemask.default", op::translate_fake_quantize_per_channel_affine_fx},
         {"aten.fill.Scalar", op::translate_fill},
@@ -866,8 +908,8 @@ const std::unordered_map<std::string, CreatorFunction> get_supported_ops_fx() {
         {"aten.masked_fill_.Tensor", op::inplace_op<op::translate_masked_fill>},
         {"aten.max.default", op::translate_max},
         {"aten.max.dim", op::translate_max_dim_fx},
-        {"aten.max_pool2d_with_indices.default", op::translate_max_poolnd_fx},
-        {"aten.max_pool3d_with_indices.default", op::translate_max_poolnd_fx},
+        {"aten.max_pool2d_with_indices.default", op::translate_max_pool2d_fx},
+        {"aten.max_pool3d_with_indices.default", op::translate_max_pool3d_fx},
         {"aten.maximum.default", op::translate_maximum},
         {"aten.mean.default", op::translate_mean_fx},
         {"aten.mean.dim", op::translate_mean_fx},
@@ -892,7 +934,7 @@ const std::unordered_map<std::string, CreatorFunction> get_supported_ops_fx() {
         {"aten.ones.default", op::translate_ones_fx},
         {"aten.ones.names", op::translate_ones_fx},
         {"aten.ones_like.default", op::translate_ones_like_fx},
-        {"aten.permute.default", op::translate_1to1_match_2_inputs<opset10::Transpose>},
+        {"aten.permute.default", op::translate_permute},
         {"aten.pow.Scalar", op::translate_pow},
         {"aten.pow.Tensor_Scalar", op::translate_pow},
         {"aten.pow.Tensor_Tensor", op::translate_pow},
@@ -905,7 +947,7 @@ const std::unordered_map<std::string, CreatorFunction> get_supported_ops_fx() {
         {"aten.reflection_pad3d.default", op::translate_reflection_pad_nd_fx},
         {"aten.relu.default", op::translate_1to1_match_1_inputs<opset10::Relu>},
         {"aten.relu_.default", op::inplace_op<op::translate_1to1_match_1_inputs<opset10::Relu>>},
-        {"aten.repeat.default", op::translate_1to1_match_2_inputs<opset10::Tile>},
+        {"aten.repeat.default", op::translate_repeat_fx},
         {"aten.roll.default", op::translate_roll},
         {"aten.rsqrt.default", op::translate_rsqrt},
         {"aten.rsub.Scalar", op::translate_rsub_fx},
@@ -951,7 +993,9 @@ const std::unordered_map<std::string, CreatorFunction> get_supported_ops_fx() {
         {"aten.upsample_nearest2d.default", op::translate_upsample_nearest2d},
         {"aten.var.correction", op::translate_var_fx},
         {"aten.var_mean.correction", op::translate_var_mean_fx},
-        {"aten.view.default", op::translate_reshape_fx},
+        {"aten.view.default", op::translate_reshape},
+        {"aten.view_as_complex.default", op::translate_view_as_complex},
+        {"aten.view_as_real.default", op::translate_view_as_real},
         {"aten.where.self", op::translate_where},
         {"aten.zeros.default", op::translate_zeros_fx},
         {"aten.zeros.names", op::translate_zeros_fx},
@@ -963,6 +1007,7 @@ const std::unordered_map<std::string, CreatorFunction> get_supported_ops_fx() {
         {"quantized_decomposed.quantize_per_channel.default", op::translate_quantize_per_channel_fx},
         {"quantized_decomposed.dequantize_per_tensor.default", op::skip_node},
         {"quantized_decomposed.dequantize_per_channel.default", op::skip_node},
+        {"inlined.constant.default", op::translate_constant},  // this is a custom ov type
     };
 };
 

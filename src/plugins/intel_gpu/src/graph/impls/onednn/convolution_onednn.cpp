@@ -1,4 +1,4 @@
-// Copyright (C) 2018-2024 Intel Corporation
+// Copyright (C) 2018-2025 Intel Corporation
 // SPDX-License-Identifier: Apache-2.0
 //
 
@@ -121,11 +121,11 @@ struct convolution_onednn : typed_primitive_onednn_impl<convolution> {
 
 private:
     int _zero_point_mask;
-    dnnl::memory::data_type _wzp_data_type;
+    dnnl::memory::data_type _wzp_data_type = dnnl::memory::data_type::undef;
 
 protected:
     std::unique_ptr<primitive_impl> clone() const override {
-        return make_unique<convolution_onednn>(*this);
+        return std::make_unique<convolution_onednn>(*this);
     }
 
     std::unordered_map<int, dnnl::memory> get_arguments(convolution_inst& instance) const override {
@@ -204,14 +204,16 @@ protected:
             auto& a_zp = arg.activations_zero_points();
             auto a_zp_dtype = a_zp.get_output_layout().data_type;
 
-            if (!data_type_traits::is_i8_u8(a_zp_dtype)) {
+            if (!data_type_traits::is_i8_u8(a_zp_dtype) && a_zp_dtype != data_types::i32) {
                 throw std::runtime_error("Unsupported data type for activations zero points for oneDNN convolution");
             }
 
             if (a_zp_dtype == data_types::i8) {
                 set_activation_zero_points_attr<ov::element_type_traits<data_types::i8>::value_type>(attrs, a_zp.as<data>(), zero_point_mask);
-            } else { // if (a_zp_dtype == data_types::u8)
+            } else if (a_zp_dtype == data_types::u8) {
                 set_activation_zero_points_attr<ov::element_type_traits<data_types::u8>::value_type>(attrs, a_zp.as<data>(), zero_point_mask);
+            } else if (a_zp_dtype == data_types::i32) {
+                set_activation_zero_points_attr<ov::element_type_traits<data_types::i32>::value_type>(attrs, a_zp.as<data>(), zero_point_mask);
             }
         }
 
@@ -356,7 +358,7 @@ public:
 
         auto prim_desc = get_convolution_primitive_descriptor(impl_params, *attr);
 
-        auto conv_onednn_impl = cldnn::make_unique<convolution_onednn>(engine, config, attr, *prim_desc,
+        auto conv_onednn_impl = std::make_unique<convolution_onednn>(engine, config, attr, *prim_desc,
                                                 get_weights_reorder(impl_params, *prim_desc, arg.get_transposed()));
 
         conv_onednn_impl->set_zero_point_mask(zero_point_mask);

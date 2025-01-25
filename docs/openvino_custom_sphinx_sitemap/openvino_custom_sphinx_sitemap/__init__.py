@@ -39,7 +39,8 @@ def create_sitemap(app, exception):
     urlset = app.builder.config.ov_sitemap_urlset
     meta = app.builder.config.ov_sitemap_meta
 
-    site_url = app.builder.config.site_url or app.builder.config.html_baseurl
+    site_url = app.builder.config.site_url
+
     if site_url:
         site_url.rstrip("/") + "/"
     else:
@@ -71,29 +72,29 @@ def create_sitemap(app, exception):
     else:
         version = ""
 
+    unique_links = set()
     while True:
         try:
             link = app.env.app.sitemap_links.get_nowait()  # type: ignore
+            if link in unique_links:
+                continue
+            unique_links.add(link)
         except queue.Empty:
             break
 
         url = ET.SubElement(root, "url")
-        scheme = app.config.sitemap_url_scheme
+        
         if app.builder.config.language:
             lang = app.builder.config.language + "/"
         else:
             lang = ""
 
+        scheme = app.config.sitemap_url_scheme 
         ET.SubElement(url, "loc").text = site_url + scheme.format(
             lang=lang, version=version, link=link
         )
 
-        if meta:
-            for entry in meta:
-                namespace, values = entry
-                namespace_element = ET.SubElement(url, namespace)
-                for tag_name, tag_value in values.items():
-                    ET.SubElement(namespace_element, tag_name).text = tag_value
+        process_coveo_meta(meta, url, link)
 
         for lang in locales:
             lang = lang + "/"
@@ -112,3 +113,51 @@ def create_sitemap(app, exception):
                                method="xml")
     print("%s was generated for URL %s in %s" % (app.config.sitemap_filename,
           site_url, filename))
+
+def process_coveo_meta(meta, url, link):
+    if not meta:
+        return
+
+    for namespace, values in meta:
+        namespace_element = ET.SubElement(url, namespace)
+        loc_element = url.find("loc")
+
+        for tag_name, tag_value in values.items():
+            if tag_name == 'ovdoctype':
+                ET.SubElement(namespace_element, tag_name).text = process_link(link)
+            elif tag_name == 'ovcategory' and loc_element is not None:
+                ET.SubElement(namespace_element, tag_name).text = extract_categories(loc_element.text)
+            elif tag_name == 'ovversion':
+                ET.SubElement(namespace_element, tag_name).text = tag_value
+
+def process_link(link):
+    if '/' in link:
+        return format_segment(link.split('/')[0].replace("-", " "))
+    return format_segment(link.split('.html')[0].replace("-", " "))
+
+def extract_categories(link):
+    path = link.split("://")[-1]
+    segments = path.split('/')[1:]
+    if segments and segments[-1].endswith('.html'):
+        segments = segments[:-1]
+
+    if segments:
+        segments = segments[1:]
+
+    if segments and '.' in segments[0]:
+        year, *rest = segments[0].split('.')
+        if year.isdigit() and len(year) == 4:
+            segments[0] = year
+
+    segments = [format_segment(segment) for segment in segments]
+
+    if segments:
+        hierarchy = ['|'.join(segments[:i]) for i in range(1, len(segments) + 1)]
+        return ';'.join(hierarchy)
+    
+    return "No category"
+
+def format_segment(segment):
+    if segment == 'c_cpp_api': segment = 'C/C++_api'
+
+    return ' '.join(word.capitalize() for word in segment.replace('-', ' ').replace('_', ' ').split())

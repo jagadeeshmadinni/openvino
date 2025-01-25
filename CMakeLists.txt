@@ -1,4 +1,4 @@
-# Copyright (C) 2018-2024 Intel Corporation
+# Copyright (C) 2018-2025 Intel Corporation
 # SPDX-License-Identifier: Apache-2.0
 #
 
@@ -58,6 +58,11 @@ include(cmake/dependencies.cmake)
 
 if(ENABLE_COVERAGE)
     include(cmake/coverage.cmake)
+endif()
+
+if(APPLE AND CMAKE_OSX_DEPLOYMENT_TARGET AND
+    CMAKE_OSX_DEPLOYMENT_TARGET VERSION_LESS 10.15)
+    message(FATAL_ERROR "OpenVINO requires MACOSX_DEPLOYMENT_TARGET at least 10.15, specified ${CMAKE_OSX_DEPLOYMENT_TARGET}")
 endif()
 
 # resolving dependencies for the project
@@ -133,7 +138,7 @@ function(ov_developer_package_export_targets)
             endforeach()
         endif()
     else()
-        message(FATAL_ERROR "Internal error: ${target_name} does not represent a cmake target")
+        message(FATAL_ERROR "Internal error: '${EXPORT_TARGET}' does not represent a cmake target")
     endif()
 
     list(REMOVE_DUPLICATES _OPENVINO_DEVELOPER_PACKAGE_TARGETS)
